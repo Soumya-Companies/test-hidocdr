@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState,createContext } from 'react'
+import './App.css'
+import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
+import { customTheme } from './theme/customTheme';
+import Navbar from './components/Navbar';
+import SiteMap from './components/SiteMap';
+import Footer from './components/Footer';
+import { getDrugsData } from './api/Drugs';
+import Routes from './router/Routes'
+
+
+export const APIContext = createContext()
 
 function App() {
+  const [response, setResponse] = useState({});
+
+  // ------------------------------------------------ API Integration
+
+  
+
+  // ------------------------------------------------ API Response destructuring
+
+  // const { drugData, adds, exploreMore } = response;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={customTheme}>
+      <APIContext.Provider value={response}>
+        <Navbar />
+        <Routes />
+        <SiteMap />
+        <Footer />
+      </APIContext.Provider>
+    </ThemeProvider>
   );
 }
 
-export default App;
+export default App
